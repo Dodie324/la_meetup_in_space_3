@@ -1,0 +1,69 @@
+<% if message != "" %>
+  <h4> <%= message %> </h4>
+<% end %>
+
+<h1><%= @meetup.name %></h1>
+
+<fieldset>
+  <legend>Description</legend>
+  <p><%= @meetup.description %></p>
+</fieldset>
+<fieldset>
+  <legend>Location</legend>
+  <p><%= @meetup.location %></p>
+</fieldset>
+
+<% if !@members.empty? %>
+  <fieldset>
+    <legend>Members</legend>
+    <% @members.each do |member| %>
+      <div class="member-tag">
+        <img src="<%= member.avatar_url %>" alt="good looking member">
+        <h4><%= member.username %></h4>
+      </div>
+    <% end %>
+  </fieldset>
+<% end %>
+
+
+<% if user_id %>
+  <div id="buttons-row">
+    <div class="join-leave-buttons">
+      <a id="join" href="/join_meetup?user_id=<%= user_id %>&meetup_id=<%= @meetup.id %>">Join</a>
+    </div>
+    <% if @members.exists?(user_id) %>
+      <div class="join-leave-buttons">
+        <a id="delete" href="/leave_group?meetup_id=<%= @meetup.id %>">Leave group</a>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+
+<% if !@comments.empty? %>
+  <fieldset>
+    <legend>Comments</legend>
+    <% @comments.each do |comment| %>
+      <div class="row comments-box">
+        <div class="small-2 columns member-comment-tag comment">
+          <img src="<%= comment.user.avatar_url %>" alt="good looking member">
+          <h4><%= comment.user.username %></h4>
+        </div>
+        <p class="small-10 columns comment"><%= comment.description %></p>
+      </div>
+    <% end %>
+  </fieldset>
+<% end %>
+
+<fieldset>
+  <legend>New comment</legend>
+  <div id="new-comment-box">
+    <form id="new-comment-form" action="/new_comment" method="POST">
+      <textarea name="description" id="comment-area" cols="120" rows="5"></textarea>
+      <input type="hidden" name="meetup_id" value="<%= @meetup.id %>">
+      <input type="hidden" name="user_id" value="<%= user_id %>">
+      <input id="submit-button" type="submit" value="Post">
+    </form>
+  </div>
+</fieldset>
+

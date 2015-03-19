@@ -1,0 +1,25 @@
+<% if message != "" %>
+  <h4> <%= message %> </h4>
+<% end %>
+
+<fieldset>
+  <legend>New Group</legend>
+  <form id="new_meetup" action "/new" method="post">
+    <div class="row-new-meetup">
+      <div class="container-new-field">
+        <label for "name">Name </label>
+        <input class="new-fields" type="text" id="name" name="name">
+      </div>
+      <div class="container-new-field">
+        <label for "description">Description </label>
+        <input class="new-fields" type="fieldtext" id="description" name="description">
+      </div>
+      <div class="container-new-field">
+        <label for "location">Location </label>
+        <input class="new-fields" type="text" id="location" name="location">
+      </div>
+    </div>
+    <input id="submit-button" type="submit" value="Add Group">
+  </form>
+</fieldset>
+
