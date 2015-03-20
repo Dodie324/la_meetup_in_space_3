@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meetups</title>
+  <link rel="stylesheet" href="/stylesheets/foundation.min.css" />
+  <link rel="stylesheet" href="/stylesheets/normalize.css" />
+  <link rel="stylesheet" href="/stylesheets/app.css" />
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="container">
+    <a class="logo" href="/">Meetups in Space</a>
+
+    <ul class="top-bar-section">
+      
+        <li><a href="/auth/github">Sign in</a></li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<div class="container">
+  <h1>Dummy</h1>
+
+<fieldset>
+  <legend>Description</legend>
+  <p>Dummy</p>
+</fieldset>
+<fieldset>
+  <legend>Location</legend>
+  <p>Dummy</p>
+</fieldset>
+
+  <fieldset>
+    <legend>Members</legend>
+    
+      <div class="member-tag">
+        <img src="https://avatars.githubusercontent.com/u/4121133?v=3" alt="good looking member">
+        <h4>cocolote</h4>
+      </div>
+    
+  </fieldset>
+
+
+
+
+
+<fieldset>
+  <legend>New comment</legend>
+  <div id="new-comment-box">
+    <form id="new-comment-form" action="/new_comment" method="POST">
+      <textarea name="description" id="comment-area" cols="120" rows="5"></textarea>
+      <input type="hidden" name="meetup_id" value="9">
+      <input type="hidden" name="user_id" value="">
+      <input id="submit-button" type="submit" value="Post">
+    </form>
+  </div>
+</fieldset>
+
+
+</div>
+
+</body>
+</html>

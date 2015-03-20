@@ -73,6 +73,7 @@ fieldset {
 
 .member-tag {
   display: inline-block;
+  margin-left: 0.5em;
   margin-right: 0.5em;
 }
 
@@ -85,6 +86,7 @@ fieldset {
 .member-tag h4 {
   margin: 0;
   text-align: center;
+  font-size: 1em;
 }
 
 #buttons-row {
@@ -104,11 +106,11 @@ fieldset {
   background-color: #000;
   opacity: 0.5;
 }
-
+/*
 .comment {
   display: inline-block;
   margin-right: 2em;
-}
+}*/
 
 #new-comment-box {
   text-align: center;
@@ -126,12 +128,23 @@ fieldset {
   color: #000;
 }
 
-.member-comment-tag img {
+.comment-row {
+  background-color: rgba(0,0,0,0.2);
+  margin-bottom: 0.5em;
+}
+
+#member-comment-tag {
+  padding: 0;
+  text-align: center;
+}
+
+#member-comment-tag img {
   width: 4.5em;
   height: 4.5em;
   margin-bottom: 0.5em;
 }
 
-.member-comment-tag h4 {
+#member-comment-tag h4 {
   margin: 0;
+  font-size: 1em;
 }

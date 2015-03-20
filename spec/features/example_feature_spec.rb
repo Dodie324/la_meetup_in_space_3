@@ -3,11 +3,9 @@ require 'spec_helper'
 feature "User views the index page" do
   scenario "user sees the correct title and alphabetically sorted" do
     visit '/'
+    titles = page.all('.meetup-row h1 a').collect(&:text)
 
-    expect(page.find('.row:nth-child(1)')).to have_content 'Book club'
-    expect(page.find('.row:nth-child(2)')).to have_content 'Dummy'
-    expect(page.find('.row:nth-child(3)')).to have_content 'Hapa Hapa'
-    expect(page.find('.row:nth-child(4)')).to have_content 'Heyyy'
+    expect(titles).to eq(titles.sort)
   end
 end
 
@@ -22,10 +20,30 @@ feature "User views the meetup page" do
   end
 end
 
+feature "User creates a new meetup" do
+  scenario "user provides name, description and location and then sees the details of the new meetup and a message stating the meetup was successfully created" do
+    user = User.create(provider: 'github', uid: '9405172', username: 'Dodie324', email: 'dodie@example.com', avatar_url: 'https://avatars.githubusercontent.com/u/9405172?v=3')
+    sign_in_as(user)
+    visit '/new'
+
+    fill_in('name', with: 'Launch Academy')
+    fill_in('description', with: 'Learn Ruby!')
+    fill_in('location', with: 'Boston')
+
+    click_button('Add Group')
+
+    expect(page).to have_content "Launch Academy"
+    expect(page).to have_content "Learn Ruby!"
+    expect(page).to have_content "Boston"
+    expect(page).to have_content "Meetup created successfully"
+  end
+end
+
 feature "User wants to join a meetup" do
   scenario "user visits meetup page, clicks button to join and successfully joins the group" do
-    visit '/'
-    click_link "Sign in"
+
+    user = User.create(provider: 'github', uid: '9405172', username: 'Dodie324', email: 'dodie@example.com', avatar_url: 'https://avatars.githubusercontent.com/u/9405172?v=3')
+    sign_in_as(user)
     visit '/show/9'
     click_link('Join')
 

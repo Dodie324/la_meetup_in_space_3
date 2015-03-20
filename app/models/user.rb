@@ -1,5 +1,12 @@
 class User < ActiveRecord::Base
-  has_many :comments
+  validates :provider, presence: true, uniqueness: true
+  validates :uid, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: /\A[a-z0-9_.+\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+\z/ }
+  validates :avatar_url, presence: true
+
+  has_many :comments, inverse_of: :user
+
 
   has_many :user_meetups
   has_many :meetups, through: :user_meetups

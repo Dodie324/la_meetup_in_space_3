@@ -1,7 +1,3 @@
-<% if message != "" %>
-  <h4> <%= message %> </h4>
-<% end %>
-
 <h1><%= @meetup.name %></h1>
 
 <fieldset>
@@ -44,12 +40,14 @@
   <fieldset>
     <legend>Comments</legend>
     <% @comments.each do |comment| %>
-      <div class="row comments-box">
-        <div class="small-2 columns member-comment-tag comment">
+      <div class="row comment-row">
+        <div class="small-1 columns" id="member-comment-tag">
           <img src="<%= comment.user.avatar_url %>" alt="good looking member">
           <h4><%= comment.user.username %></h4>
         </div>
-        <p class="small-10 columns comment"><%= comment.description %></p>
+        <div class="small-11 columns">
+          <p><%= comment.description %></p>
+        </div>
       </div>
     <% end %>
   </fieldset>

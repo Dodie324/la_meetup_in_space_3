@@ -42,7 +42,6 @@ end
 ##########
 get '/' do
   @meetups = Meetup.all
-  # @title = "Hello World"
   erb :index
 end
 
@@ -50,11 +49,11 @@ get '/show/:id' do
   @meetup   = Meetup.find(params[:id])
   @members  = @meetup.users
   @comments = @meetup.comments
-  erb :show, locals: { user_id: session[:user_id], message: params[:message] || "" }
+  erb :show, locals: { user_id: session[:user_id] }
 end
 
 get '/new' do
-  erb :new, locals: { message: params[:message] || "" }
+  erb :new
 end
 
 post '/new' do
@@ -62,10 +61,10 @@ post '/new' do
     Meetup.create!(name: params[:name], description: params[:description], location: params[:location])
     flash[:notice] = "Meetup created successfully"
     last_id = Meetup.all.last.id
-    redirect "/show/#{last_id}?message=#{flash[:notice]}"
+    redirect "/show/#{last_id}"
   else
     flash[:notice] = "You need to fill up the fields"
-    redirect "/new?message=#{flash[:notice]}"
+    redirect "/new"
   end
 end
 
@@ -77,14 +76,14 @@ get '/join_meetup' do
     flash[:notice] = "You are already a member of this group!"
   end
 
-  redirect "/show/#{params[:meetup_id]}?message=#{flash[:notice]}"
+  redirect "/show/#{params[:meetup_id]}"
 end
 
 get '/leave_group' do
   UserMeetup.where(user_id: session[:user_id], meetup_id: params[:meetup_id]).destroy_all
   flash[:notice] = "You have left this group!"
 
-  redirect "/show/#{params[:meetup_id]}?message=#{flash[:notice]}"
+  redirect "/show/#{params[:meetup_id]}"
 end
 
 post '/new_comment' do
@@ -95,7 +94,7 @@ post '/new_comment' do
     flash[:notice] = "The comment cant be blank"
   end
 
-  redirect "/show/#{params[:meetup_id]}?message=#{flash[:notice]}"
+  redirect "/show/#{params[:meetup_id]}"
 end
 
 get '/auth/github/callback' do
